@@ -1,0 +1,271 @@
+:root {
+  --paper: #ffffff;
+  --vanilla: #f3e5ab;
+  --ink: #332421;
+  --soft: #766460;
+  --rule: #ead9c8;
+  --accent: #b44e5d;
+  --accent-deep: #8f3948;
+  --highlight: #f2bb66;
+  --warn: #9a3f4f;
+}
+
+html,
+body {
+  margin: 0;
+  width: 360px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 15px/1.5 "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+main {
+  padding: 20px 20px 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex: 0 0 44px;
+}
+
+.wordmark {
+  margin: 0;
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.tag {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.78rem;
+}
+
+h1 {
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.intention-field {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--rule);
+  border-radius: 16px;
+  padding: 12px 13px;
+  resize: vertical;
+  background: var(--paper);
+  font: inherit;
+}
+
+textarea:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.intention-example {
+  position: absolute;
+  inset: 12px 13px;
+  margin: 0;
+  color: var(--soft);
+  pointer-events: none;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.intention-example[hidden] {
+  display: none;
+}
+
+.intention-example__prefix {
+  font-style: italic;
+}
+
+.caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 1em;
+  margin-left: 1px;
+  background: var(--accent);
+  vertical-align: -0.12em;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.label,
+.eyebrow {
+  margin: 12px 0 6px;
+  color: var(--accent-deep);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.time-pick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 6px;
+}
+
+.time-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1.5px solid var(--rule);
+  background: var(--paper);
+  border-radius: 14px;
+  padding: 6px;
+}
+
+.time-field label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.time-field input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  padding: 0;
+  -moz-appearance: textfield;
+}
+
+.time-field input::-webkit-outer-spin-button,
+.time-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-field input:focus {
+  outline: none;
+}
+
+.time-field span {
+  color: var(--soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.step {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.step:hover {
+  background: var(--vanilla);
+}
+
+.time-preview {
+  margin: 0 0 12px;
+  color: var(--soft);
+  font-size: 0.84rem;
+}
+
+.primary,
+.ghost {
+  width: 100%;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  padding: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.primary {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(180, 78, 93, 0.18);
+}
+
+.primary:hover {
+  background: var(--accent-deep);
+}
+
+.ghost {
+  background: transparent;
+  border-color: var(--rule);
+  color: var(--ink);
+  background: rgba(243, 229, 171, 0.22);
+}
+
+.privacy,
+#ended-intention {
+  color: var(--soft);
+  font-size: 0.84rem;
+  margin: 0;
+}
+
+.goal {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--vanilla);
+  border-radius: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.countdown {
+  font-size: 2.4rem;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  margin: 10px 0 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.error {
+  color: var(--warn);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
