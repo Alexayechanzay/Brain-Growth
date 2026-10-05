@@ -1,4 +1,4 @@
-import { DEMO_INTENTION, DEMO_VIDEOS, evaluate, searchQueryFor } from "./evaluate.js";
+import { DEMO_INTENTION, DEMO_VIDEOS, evaluateWithModel, searchQueryFor } from "./evaluate.js";
 import { playCue, unlockAudio } from "./sounds.js";
 import {
   clearCooldowns,
@@ -153,40 +153,113 @@ function renderHome() {
     <main class="page">
       <header class="topbar">
         ${brandLink()}
-        <nav>
-          <a href="#/start">Try it here</a>
-          <a href="#extension">Use it on YouTube</a>
+        <nav aria-label="Main navigation">
+          <a href="#problem">Why it matters</a>
+          <a href="#solution">How it works</a>
+          <a href="#impact">Impact</a>
+          <a href="#team">Team</a>
         </nav>
       </header>
       <section class="hero">
-        <p class="eyebrow">For homework that lives on YouTube</p>
+        <p class="eyebrow">STI AI Competition · The Lumbini Mandalay</p>
         <h1>Stay on the topic you sat down to study.</h1>
         <p class="lede">
-          You need a video for class. Two clicks later you’re somewhere else.
-          Brain Growth starts you on a search for <em>your</em> topic, then pauses
-          only if what you open looks off. You’re still in charge.
+          Brain Growth is a student-started Chrome extension that helps learners
+          use YouTube deliberately. It opens the search they intended, uses AI
+          to check each video against their study goal, and pauses respectfully
+          when a title appears off-topic. The student always has the final choice.
         </p>
         <div class="hero__actions">
-          <a class="primary" href="#/start">Start studying</a>
-          <a class="ghost" href="#how">How it works</a>
+          <a class="primary" href="#/start">Try the interactive demo</a>
+          <a class="ghost" href="#solution">Explore the solution</a>
+        </div>
+        <ul class="proof-strip" aria-label="Project highlights">
+          <li><strong>Student-started</strong><span>No account or surveillance</span></li>
+          <li><strong>Purpose-aware AI</strong><span>More than keyword matching</span></li>
+          <li><strong>Built and working</strong><span>Chrome extension plus demo</span></li>
+        </ul>
+      </section>
+
+      <section id="problem" class="story-section">
+        <div class="section-heading">
+          <p class="eyebrow">The problem and the person</p>
+          <h2>The lesson did not fail. The path failed.</h2>
+        </div>
+        <div class="split split--balanced">
+          <div class="panel panel--flush">
+            <h3>YouTube can replace an intention before a student makes a deliberate choice.</h3>
+            <p>
+              A learner opens YouTube for one explanation, but Home, Shorts, and
+              recommendations are designed to win the next click. Blocking YouTube
+              is not the answer because the lesson itself may be there.
+            </p>
+            <p>
+              Keyword filters also fail: a useful lesson may not repeat the exact
+              topic, while an unrelated story can borrow a word such as “Physics.”
+            </p>
+          </div>
+          <article class="persona">
+            <p class="eyebrow">Designed for</p>
+            <h3>Thiri Win, 16</h3>
+            <p>IGCSE student · 25–40 minute study sittings</p>
+            <blockquote>
+              “I don’t need YouTube banned. I need it to start on my topic.”
+            </blockquote>
+            <p>
+              Thiri wants one useful explanation, control over every choice, and
+              no report sent to a parent when her study session ends.
+            </p>
+          </article>
         </div>
       </section>
-      <section id="how" class="panel">
-        <h2>How a study sitting works</h2>
-        <ol class="steps">
-          <li>Write what you’re studying. Pick how long.</li>
-          <li>You land on search for that topic — not the homepage.</li>
-          <li>On-topic videos stay quiet. Vague titles just say “not sure yet.”</li>
-          <li>If it looks off-topic, Brain Growth pauses. Go back to search, or keep watching.</li>
-          <li>When time’s up, Brain Growth is off. YouTube is normal again.</li>
+
+      <section class="purpose-grid" aria-label="Mission and vision">
+        <article class="purpose-card">
+          <p class="eyebrow">Our vision</p>
+          <h2>A fairer first minute online.</h2>
+          <p>
+            Every student should be able to open YouTube for homework and finish
+            the study sitting they intended—without being blocked, scored, or
+            watched after they stop.
+          </p>
+        </article>
+        <article class="purpose-card">
+          <p class="eyebrow">Our mission</p>
+          <h2>Protect the learner’s intention.</h2>
+          <p>
+            Give students a temporary study contract: start on their search,
+            make off-topic clicks deliberate, preserve their choice, and stop
+            observing when the session ends.
+          </p>
+        </article>
+      </section>
+
+      <section id="solution" class="story-section">
+        <div class="section-heading">
+          <p class="eyebrow">AI-driven solution</p>
+          <h2>One narrow AI job, used with restraint.</h2>
+          <p>
+            Brain Growth compares the learner’s written intention with the video
+            title. It starts with the title and uses the description only when
+            more evidence is needed. It never reads comments or transcripts.
+          </p>
+        </div>
+        <ol class="decision-flow">
+          <li><span>1</span><div><strong>Start</strong><p>Write a topic and choose a duration.</p></div></li>
+          <li><span>2</span><div><strong>Search</strong><p>Land on the topic—not YouTube Home.</p></div></li>
+          <li><span>3</span><div><strong>Judge</strong><p>AI returns on topic, not sure yet, or off topic.</p></div></li>
+          <li><span>4</span><div><strong>Choose</strong><p>Stay quiet, show uncertainty, or pause with two options.</p></div></li>
+          <li><span>5</span><div><strong>Stop</strong><p>The timer or “I’m done” ends observation.</p></div></li>
         </ol>
       </section>
+
       <section class="split">
         <div class="panel panel--flush">
           <h2>Try the three videos</h2>
           <p>
             Pretend you’re studying <strong>${escapeHtml(DEMO_INTENTION)}</strong>.
-            Open these in order — they show Brain Growth reading the title, not just hunting for keywords.
+            Open these in order. Together they show why purpose matters more
+            than matching words.
           </p>
           <ul class="demo-list">
             ${DEMO_VIDEOS.map(
@@ -202,18 +275,46 @@ function renderHome() {
           </ul>
         </div>
         <aside class="note">
-          <p class="eyebrow">What Brain Growth won’t do</p>
+          <p class="eyebrow">Responsible by design</p>
+          <h2>The AI advises. It does not confiscate.</h2>
           <p>
-            No accounts. No parents watching. No streaks. No blocking the tab.
-            It only looks at the video title while you say you’re studying.
+            No accounts, parent dashboards, streaks, diagnosis, or device-wide
+            monitoring. An off-topic pause always offers <strong>Back to my
+            search</strong> and <strong>Keep watching</strong>.
           </p>
+          <p class="privacy-line"><strong>Privacy boundary:</strong> intention, title and channel first; description only if needed; never comments or transcripts.</p>
         </aside>
       </section>
+
+      <section id="impact" class="impact-section">
+        <div class="sdg-mark" aria-hidden="true"><span>4</span><strong>Quality<br />Education</strong></div>
+        <div>
+          <p class="eyebrow">United Nations Sustainable Development Goal 4</p>
+          <h2>Helping learners reach the educational content they came for.</h2>
+          <p>
+            Brain Growth supports inclusive, effective learning by protecting
+            access to useful explanations without banning the platform that hosts
+            them. It is built for short, self-directed study sessions and keeps
+            the learner—not a parent or institution—in control.
+          </p>
+          <div class="impact-measures">
+            <div><strong>Access</strong><span>Keep YouTube available for learning</span></div>
+            <div><strong>Agency</strong><span>Let students override every pause</span></div>
+            <div><strong>Trust</strong><span>Collect no browsing-history report</span></div>
+          </div>
+          <p class="evidence-note">
+            We measure completed study sittings, returns to the intended search,
+            false pauses, and whether students choose to use Brain Growth again.
+            We do not claim unmeasured grade or health outcomes.
+          </p>
+        </div>
+      </section>
+
       <section id="extension" class="panel">
         <h2>Use it on real YouTube</h2>
         <p>
-          This page is a practice version. The real thing is a Chrome extension
-          in the <code>extension</code> folder.
+          This website is an interactive practice environment. The main product
+          is a working Chrome extension for real YouTube study sessions.
         </p>
         <ol class="steps">
           <li>Go to <code>chrome://extensions</code> and turn on Developer mode.</li>
@@ -221,6 +322,30 @@ function renderHome() {
           <li>Open the Brain Growth icon, write your topic, tap <strong>Start studying</strong>.</li>
         </ol>
       </section>
+
+      <section id="team" class="team-section">
+        <div>
+          <p class="eyebrow">The developers</p>
+          <h2>Built by students, for students.</h2>
+          <p>
+            Brain Growth was designed and developed by Team BrainGrowth at
+            <strong>The Lumbini Mandalay</strong> for the STI AI Competition.
+            The team combines a real student problem with a buildable,
+            privacy-conscious use of AI.
+          </p>
+        </div>
+        <div class="team-list">
+          <div><strong>Aye Chan Zay</strong><span>Project leader</span></div>
+          <div><strong>La Yaung Naing</strong><span>Team member</span></div>
+          <div><strong>Yaung Ni Lin</strong><span>Team member</span></div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        ${brandLink()}
+        <p>AI-assisted study intention alignment · STI AI Competition</p>
+        <a href="#/start">Try the demo</a>
+      </footer>
     </main>
   `;
 }
@@ -312,7 +437,8 @@ function renderStart() {
         </div>
         <p id="duration-preview" class="time-preview">${escapeHtml(formatDurationLabel(durationHours * 60 + durationMinutes))} · up to 4 hours</p>
         <p class="privacy">
-          Brain Growth only looks at the video title while you study. It stops when you stop.
+          Brain Growth looks at the title first, then the description if it still isn’t sure.
+          It never reads comments or the transcript. It stops when you stop.
         </p>
         <p class="form-error" id="error" hidden></p>
         <button class="primary" type="submit">Start studying</button>
@@ -463,7 +589,7 @@ function renderSearch() {
   });
 }
 
-function renderWatch(id) {
+async function renderWatch(id) {
   const session = sessionOrRedirect();
   if (!session) {
     return;
@@ -473,7 +599,11 @@ function renderWatch(id) {
     root.innerHTML = `<main class="page"><p>That practice video isn’t here.</p><a href="#/demo/results">Back to search</a></main>`;
     return;
   }
-  const evaluation = evaluate(session.intention, { title: video.title });
+  const evaluation = await evaluateWithModel(session.intention, {
+    title: video.title,
+    channel: video.channel,
+    description: video.blurb,
+  });
   const showOverlay =
     evaluation.status === "drifting" && !dismissed[video.id] && !isOnCooldown(video.id);
   const label = STATUS_LABEL[evaluation.status] || "Studying";
